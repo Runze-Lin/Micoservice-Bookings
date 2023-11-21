@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Booking Management</title>
+    <link rel="icon" type="image/x-icon" href="https://example.com/static/favicon.ico" />
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0ebe3; /* beige background */
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto; /* centering */
+            overflow: hidden;
+        }
+        h1, h2 {
+            color: #8a7f8d; /* purple headings */
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #a3a5a7; /* grey subheadings */
+            margin-bottom: 10px;
+        }
+        form {
+            background: #d9d2c3; /* brown boxes background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        input[type="text"], input[type="email"], input[type="number"], select {
+            padding: 8px;
+            margin: 10px;
+            border-radius: 4px;
+            border: 1px solid #c7bfb8; /* grey border */
+            flex-basis: 180px;
+            background: #f0ebe3; /* beige background */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #a3b1a6; /* green buttons */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #919d90; /* darker green when hovered */
+        }
+        #getUsersResult {
+            background: #eceae4; /* grey results */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            color: #a0a4a8; /* grey-ish blue */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Management System</h1>
+        
+        <!-- Filter Bookings Form -->
+        <h2>Filter Bookings</h2>
+        <form id="filterBookingsForm">
+            <input type="text" name="booking_id" placeholder="Booking ID">
+            <input type="number" name="user_id" placeholder="User ID">
+            <input type="number" name="property_id" placeholder="Property ID">
+            <input type="number" name="total_price" placeholder="Total Price">
+            <input type="number" name="total_price_gt" placeholder="Total Price Greater Than">
+            <input type="number" name="total_price_lt" placeholder="Total Price Less Than">
+            <!-- Pagination -->
+            <input type="number" name="limit" placeholder="Limit" value="10"> <!-- Default LIMIT 10 -->
+            <input type="number" name="offset" placeholder="Offset" value="0">  <!-- Default OFFSET 0 -->
+            <button type="submit">Apply Filters</button>
+        </form>
+
+        <!-- Get all bookings -->
+        <h2>Get All Bookings</h2>
+        <button id="getAllBookingsButton">Get All Properties</button>
+
+        <!-- Display bookings results from either 'Filter Bookings' or 'Get All Bookings' -->
+        <h2>Bookings Results</h2>
+        <div id="getBookingsResult"></div>
+
+        <!-- Add Booking Form -->
+        <h2>Add Booking</h2>
+        <form id="createBookingForm">
+            <div>
+                <label for="create-user-id">User ID:</label>
+                <input type="number" id="create-user-id" name="user_id">
+            </div>
+            <div>
+                <label for="create-property-id">Property ID:</label>
+                <input type="number" id="create-property-id" name="property_id">
+            </div>
+            <div>
+                <label for="create-total-price">Total Price:</label>
+                <input type="number" id="create-total-price" name="total_price">
+            </div>
+            <input type="submit" value="Add Booking">
+        </form>
+
+        <!-- Update Booking Form -->
+        <h2>Update Booking</h2>
+        <form id="updateBookingForm">
+            <div>
+                <label for="update-booking-id">Booking ID:</label>
+                <input type="text" id="update-booking-id" name="booking_id">
+            </div>
+            <div>
+                <label for="update-user-id">User ID:</label>
+                <input type="number" id="update-user-id" name="user_id">
+            </div>
+            <div>
+                <label for="update-property-id">Property ID:</label>
+                <input type="number" id="update-property-id" name="property_id">
+            </div>
+            <div>
+                <label for="update-total-price">Total Price:</label>
+                <input type="number" id="update-total-price" name="total_price">
+            </div>
+            <input type="submit" value="Update Booking">
+        </form>
+
+        <!-- Delete Booking Form -->
+        <h2>Delete Booking</h2>
+        <form id="deleteBookingForm">
+            <div>
+                <label for="delete-booking-id">Booking ID:</label>
+                <input type="text" id="delete-booking-id" name="booking_id">
+            </div>
+            <input type="submit" value="Delete Booking">
+        </form>
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
