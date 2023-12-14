@@ -48,7 +48,6 @@ jobs:
         # Commands to run on EC2 instance
         cd Micoservice-Bookings
         git pull
-        python3 app.py
         ENDSSH
 
         
