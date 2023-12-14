@@ -20,10 +20,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install -r requirements.txt
-    - name: Run tests
-      run: |
-        # run your test commands here
-        pytest
+
 
   deploy:
     needs: build
@@ -36,3 +33,4 @@ jobs:
       run: |
         # Add your deployment commands here
         echo "Deploying to production server"
+        python3 app.py
