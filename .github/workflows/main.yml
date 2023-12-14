@@ -33,9 +33,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install fastapi
         pip install -r requirements.txt 
-    
+    - name: Set up SSH key
+      env:
+        EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_ec2
+        chmod 600 ~/.ssh/id_ec2
+        ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+
     - name: Deploy
       run: |
-        # Add your deployment commands here
-        echo "Deploying to production server"
+        ssh -i ~/.ssh/id_ec2 ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
+        # Commands to run on EC2 instance
+        cd /Micoservice-Bookings
+        git pull
+        python3 app.py
+        ENDSSH
+
         
