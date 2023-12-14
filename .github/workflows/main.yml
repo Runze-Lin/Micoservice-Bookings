@@ -46,7 +46,7 @@ jobs:
       run: |
         ssh -i $HOME/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
         # Commands to run on EC2 instance
-        cd /path/to/your/application
+        cd Micoservice-Bookings
         git pull
         python3 app.py
         ENDSSH
