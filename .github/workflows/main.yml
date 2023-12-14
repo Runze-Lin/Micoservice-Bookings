@@ -38,13 +38,13 @@ jobs:
         EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       run: |
         mkdir -p ~/.ssh
-        echo "$EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+        echo "$EC2_SSH_PRIVATE_KEY" > /home/ec2-user/.ssh/id_rsa
+        chmod 600 /home/ec2-user/.ssh/id_rsa
+        ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> /home/ec2-user/.ssh/known_hosts
 
     - name: Deploy
       run: |
-        ssh -i ~/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
+        ssh -i /home/ec2-user/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
         # Commands to run on EC2 instance
         cd /Micoservice-Bookings
         git pull
