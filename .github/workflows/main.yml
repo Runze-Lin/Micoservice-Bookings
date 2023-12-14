@@ -38,4 +38,4 @@ jobs:
       run: |
         # Add your deployment commands here
         echo "Deploying to production server"
-        python3 app.py
+        
