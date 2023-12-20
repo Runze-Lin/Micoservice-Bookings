@@ -45,6 +45,7 @@ async def root():
 @app.get("/bookings")           # get bookings
 async def get_bookings(booking_id: Optional[str] = None, 
                     user_id: Optional[int] = None, 
+                    host_id: Optional[int] = None,
                     property_id: Optional[int] = None, 
                     total_price: Optional[float] = None, 
                     total_price_gt: Optional[float] = None, 
@@ -54,6 +55,7 @@ async def get_bookings(booking_id: Optional[str] = None,
     filters = {
         "booking_id": booking_id,
         "user_id": user_id,
+        "host_id": host_id,
         "property_id": property_id,
         "total_price": total_price,
         "total_price_gt": total_price_gt,
@@ -64,8 +66,14 @@ async def get_bookings(booking_id: Optional[str] = None,
 
 @app.get("/bookings/{user_id}")  # getting bookings by user_id
 async def get_bookings_by_user(user_id: int, limit: Optional[int] = None, offset: Optional[int] = None):
-    bookings = bookings_svc.get_bookings({"user_id": user_id}, limit, offset)
-    return bookings
+    user_bookings = bookings_svc.get_bookings({"user_id": user_id}, limit, offset)
+    host_bookings = bookings_svc.get_bookings({"host_id": user_id}, limit, offset)
+
+    # display both user_bookings and host_bookings of this user_id
+    all_bookings = {b['booking_id']: b for b in user_bookings + host_bookings}.values()
+    
+    return list(all_bookings)
+
 
 @app.post("/bookings")          # create booking
 async def create_booking(request: Request):

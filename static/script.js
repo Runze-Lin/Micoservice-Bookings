@@ -39,7 +39,7 @@ function getBookings(formData = null) {
             resultContainer.innerHTML = '';
             if (Array.isArray(data) && data.length > 0) {
                 data.forEach(function(booking) {
-                    var bookingString = 'Booking ID: ' + booking.booking_id + ', User ID: ' + booking.user_id + ', Property ID: ' + booking.property_id + ', Total Price: ' + booking.total_price;
+                    var bookingString = 'Booking ID: ' + booking.booking_id + ', User ID: ' + booking.user_id + ', Host ID:' + booking.host_id + ', Property ID: ' + booking.property_id + ', Total Price: ' + booking.total_price;
                     var bookingDiv = document.createElement('div');
                     bookingDiv.textContent = bookingString;
                     resultContainer.appendChild(bookingDiv);

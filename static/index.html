@@ -46,7 +46,7 @@
             flex-basis: 180px;
             background: #f0ebe3; /* beige background */
         }
-        button {
+        button, input[type="submit"] {
             padding: 10px 20px;
             background-color: #a3b1a6; /* green buttons */
             color: white;
@@ -55,9 +55,10 @@
             cursor: pointer;
             margin-left: 10px;
         }
-        button:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #919d90; /* darker green when hovered */
         }
+
         #getUsersResult {
             background: #eceae4; /* grey results */
             padding: 15px;
@@ -68,6 +69,7 @@
         p {
             color: #a0a4a8; /* grey-ish blue */
         }
+        
     </style>
 
 </head>
@@ -80,6 +82,7 @@
         <form id="filterBookingsForm">
             <input type="text" name="booking_id" placeholder="Booking ID">
             <input type="number" name="user_id" placeholder="User ID">
+            <input type="number" name="host_id" placeholder="Host ID">
             <input type="number" name="property_id" placeholder="Property ID">
             <input type="number" name="total_price" placeholder="Total Price">
             <input type="number" name="total_price_gt" placeholder="Total Price Greater Than">
@@ -106,6 +109,10 @@
                 <input type="number" id="create-user-id" name="user_id">
             </div>
             <div>
+                <label for="create-host-id">Host ID:</label>
+                <input type="number" id="create-host-id" name="host_id">
+            </div>
+            <div>
                 <label for="create-property-id">Property ID:</label>
                 <input type="number" id="create-property-id" name="property_id">
             </div>
@@ -126,6 +133,10 @@
             <div>
                 <label for="update-user-id">User ID:</label>
                 <input type="number" id="update-user-id" name="user_id">
+            </div>
+            <div>
+                <label for="update-user-id">Host ID:</label>
+                <input type="number" id="update-host-id" name="host_id">
             </div>
             <div>
                 <label for="update-property-id">Property ID:</label>
