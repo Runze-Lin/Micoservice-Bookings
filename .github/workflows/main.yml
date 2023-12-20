@@ -40,11 +40,11 @@ jobs:
         mkdir -p $HOME/.ssh
         echo "$EC2_SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
         chmod 600 $HOME/.ssh/id_rsa
-        ssh-keyscan -H ec2-35-86-251-146.us-west-2.compute.amazonaws.com >> $HOME/.ssh/known_hosts
+        ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> $HOME/.ssh/known_hosts
 
     - name: Deploy
       run: |
-        ssh -i $HOME/.ssh/id_rsa ec2-35-86-251-146.us-west-2.compute.amazonaws.com 'bash -s' << 'ENDSSH'
+        ssh -i $HOME/.ssh/id_rsa ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
         # Commands to run on EC2 instance
         cd Micoservice-Bookings
         git pull
