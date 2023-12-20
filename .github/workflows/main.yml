@@ -44,7 +44,7 @@ jobs:
 
     - name: Deploy
       run: |
-        ssh -i $HOME/.ssh/id_rsa ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
+        ssh -i $HOME/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
         # Commands to run on EC2 instance
         cd Micoservice-Bookings
         git pull
