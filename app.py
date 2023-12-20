@@ -62,6 +62,11 @@ async def get_bookings(booking_id: Optional[str] = None,
     query = {k: v for k, v in filters.items() if v}  # simple search with support for greater than and less than filters
     return bookings_svc.get_bookings(query, limit, offset)
 
+@app.get("/bookings/{user_id}")  # getting bookings by user_id
+async def get_bookings_by_user(user_id: int, limit: Optional[int] = None, offset: Optional[int] = None):
+    bookings = bookings_svc.get_bookings({"user_id": user_id}, limit, offset)
+    return bookings
+
 @app.post("/bookings")          # create booking
 async def create_booking(request: Request):
     booking_data = await request.json()
