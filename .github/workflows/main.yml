@@ -6,48 +6,88 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  TF_VERSION: '1.0.0' # Set the desired Terraform version
+
 jobs:
+  setup_infrastructure:
+    name: Setup AWS Infrastructure
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
   build:
+    needs: setup_infrastructure
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-        pip install -r requirements.txt
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -r requirements.txt
 
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Run tests
+        run: |
+          pip install pytest
+          pytest
 
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install fastapi
-        pip install -r requirements.txt 
-    - name: Set up SSH key
-      env:
-        EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-      run: |
-        mkdir -p $HOME/.ssh
-        echo "$EC2_SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
-        chmod 600 $HOME/.ssh/id_rsa
-        ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> $HOME/.ssh/known_hosts
-
-    - name: Deploy
-      run: |
-        ssh -i $HOME/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
-        # Commands to run on EC2 instance
-        cd Micoservice-Bookings
-        git pull
-        ENDSSH
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi
+          pip install -r requirements.txt
+      - name: Set up SSH key
+        env:
+          EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p $HOME/.ssh
+          echo "$EC2_SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
+          chmod 600 $HOME/.ssh/id_rsa
+          ssh-keyscan -H ec2-174-129-45-19.compute-1.amazonaws.com >> $HOME/.ssh/known_hosts
+      - name: Deploy to AWS EC2
+        run: |
+          ssh -i $HOME/.ssh/id_rsa ec2-user@ec2-174-129-45-19.compute-1.amazonaws.com 'bash -s' << 'ENDSSH'
+          cd Microservice-Bookings
+          git pull
+          # Your deployment commands here
+          ENDSSH
 
         
