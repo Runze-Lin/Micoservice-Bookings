@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Booking Management</title>
+    <link rel="stylesheet" type="text/css" href="/static/bookings.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/static/logo.jpeg" alt="Logo" class="logo">
+            <h1>Booking Management System</h1>
+        </div>
+
+        <div class="filters">
+            <input type="number" id="propertyIdInput" placeholder="Enter Property ID">
+            <button id="fetchBookingsButton">Fetch Bookings</button>
+        </div>
+
+        <table id="bookingsTable">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Property ID</th>
+                    <th>User ID</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody id="bookingsResult">
+
+            </tbody>
+        </table>
+<div class="booking-form">
+            <h2>Create Booking</h2>
+            <form id="createBookingForm">
+                <!-- Add input fields for the booking details -->
+                <input type="number" id="create-user-id" name="user_id" placeholder="User ID" required>
+                <input type="number"  id="create-property-id" name="property_id" placeholder="Property ID" required>
+                <input type="number" id="create-total-price" name="total_price" placeholder="Total Price" required>
+                <button type="submit">Create Booking</button>
+            </form>
+        </div>
+
+        <!-- Edit Booking Form -->
+        <div class="booking-form">
+            <h2>Edit Booking</h2>
+            <form id="editBookingForm">
+                <input type="text" id="update-booking-id" name="booking_id" placeholder="Booking ID" required>
+                <input type="number" id="update-user-id" name="user_id" placeholder="New User ID">
+                <input type="number" id="update-property-id" name="property_id" placeholder="New Property ID">
+                <input type="number" id="update-total-price" name="total_price" placeholder="New Total Price">
+                <button type="submit">Edit Booking</button>
+            </form>
+        </div>
+
+        <!-- Delete Booking Form -->
+        <div class="booking-form">
+            <h2>Delete Booking</h2>
+            <form id="deleteBookingForm">
+                <input type="text" id="delete-booking-id" name="booking_id" placeholder="Booking ID" required>
+                <button type="submit">Delete Booking</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="/static/host_booking_management.js"></script>
+</body>
+</html>

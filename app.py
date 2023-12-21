@@ -42,6 +42,15 @@ bookings_svc = BookingsService(conn)
 async def root():
     return FileResponse('static/index.html')
 
+@app.get("/host")
+async def host():
+    return FileResponse('static/host.html')
+
+@app.get("/booking_management_host/{host_id}")
+async def booking_management_host(host_id: str):
+    return FileResponse('static/booking_management_host.html')
+
+
 @app.get("/bookings")           # get bookings
 async def get_bookings(booking_id: Optional[str] = None, 
                     user_id: Optional[int] = None, 

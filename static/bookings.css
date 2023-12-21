@@ -1,0 +1,133 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #dccaae;
+    color: #413611;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+h1 {
+    color: #413611;
+}
+
+.filters {
+    background: #f0ebe3;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+input[type="number"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #413611;
+    background: #f0ebe3;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #413611;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #413611;
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    background: #dbcbab;
+}
+
+tbody tr:nth-child(odd) {
+    background: #eceae4;
+}
+
+tbody tr:nth-child(even) {
+    background: #f0ebe3;
+}
+
+.booking-form {
+    background: #f0ebe3;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form h2 {
+    color: #413611;
+}
+
+.booking-form form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    align-items: center;
+}
+
+.booking-form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #413611;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.booking-form button {
+    padding: 10px 20px;
+    background-color: #413611;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.booking-form button:hover {
+    opacity: 0.8;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    .filters input[type="number"],
+    .filters button {
+        flex-basis: 100%; /
+        margin: 10px 0;
+    }
+}
