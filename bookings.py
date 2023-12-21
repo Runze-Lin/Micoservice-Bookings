@@ -58,7 +58,7 @@ class BookingsService:
         # padding into 8 digits
         next_id = str(next_id_int).zfill(8)
 
-        columns = ['user_id', 'property_id', 'total_price']
+        columns = ['user_id', 'host_id', 'property_id', 'total_price']
         values = [next_id] + [booking_data.get(col) for col in columns]
 
         # execute insert query
