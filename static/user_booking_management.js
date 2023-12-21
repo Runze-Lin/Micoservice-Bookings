@@ -67,35 +67,6 @@ document.getElementById('createBookingForm').addEventListener('submit', function
         });
 });
 
-// UPDATE Booking
-document.getElementById('editBookingForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var formData = new FormData(event.target);
-    var bookingId = formData.get('booking_id');
-    formData.delete('booking_id');
-    var bookingData = {};
-    formData.forEach(function(value, key) {
-        if (value) bookingData[key] = value;
-    });
-
-    fetch(apiBaseUrl + '/bookings/' + bookingId, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingData),
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        alert('Booking updated');
-    })
-    .catch(function(error) {
-        alert('Error updating booking');
-        console.error('Error:', error);
-    });
-});
 
 document.getElementById('deleteBookingForm').addEventListener('submit', function(event) {
     event.preventDefault();
