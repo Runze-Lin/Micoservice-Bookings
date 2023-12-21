@@ -62,7 +62,7 @@ class BookingsService:
         values = [next_id] + [booking_data.get(col) for col in columns]
 
         # execute insert query
-        query = "INSERT INTO Bookings (booking_id, user_id, property_id, total_price) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO Bookings (booking_id, host_id, user_id, property_id, total_price) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(query, values)
         self.db.commit()
         cnt = cursor.rowcount
