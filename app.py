@@ -5,9 +5,10 @@ from bookings import BookingsService  # Assuming a similar service class for boo
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from middleservice import LoggingMiddleware
 
 app = FastAPI()
-
+app.add_middleware(LoggingMiddleware)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
