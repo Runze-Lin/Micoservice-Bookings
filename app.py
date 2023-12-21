@@ -42,6 +42,10 @@ bookings_svc = BookingsService(conn)
 async def root():
     return FileResponse('static/index.html')
 
+@app.get("/clientType")
+async def clientType():
+    return FileResponse('static/clienttype.html')
+
 @app.get("/host")
 async def host():
     return FileResponse('static/host.html')
@@ -49,6 +53,10 @@ async def host():
 @app.get("/booking_management_host/{host_id}")
 async def booking_management_host(host_id: str):
     return FileResponse('static/booking_management_host.html')
+
+@app.get("/user_booking_management/{host_id}")
+async def user_booking_management(host_id: str):
+    return FileResponse('static/user_booking_management.html')
 
 
 @app.get("/bookings")           # get bookings
@@ -80,7 +88,7 @@ async def get_bookings_by_user(user_id: int, limit: Optional[int] = None, offset
 
     # display both user_bookings and host_bookings of this user_id
     all_bookings = {b['booking_id']: b for b in user_bookings + host_bookings}.values()
-    
+
     return list(all_bookings)
 
 

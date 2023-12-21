@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Host ID</title>
+    <link rel="stylesheet" type="text/css" href="/static/bookings.css">
+</head>
+<body>
+    <div class="container">
+        <img src="/static/logo.jpeg" alt="Logo" class="logo">
+        <h1>Choose a Client Type</h1>
+        <button id="hostButton">Host</button>
+        <button id="userButton">User</button>
+    </div>
+    <script>
+        document.getElementById('hostButton').addEventListener('click', function() {
+            window.location.href = window.location.origin + '/host';
+        });
+
+        document.getElementById('userButton').addEventListener('click', function() {
+            window.location.href = 'http://localhost:8013/user';
+        });
+    </script>
+</body>
+</html>
