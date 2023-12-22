@@ -1,6 +1,7 @@
 var apiBaseUrl = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012';
-var pathArray = window.location.pathname.split('/');
-var userId = pathArray[pathArray.length - 1];
+var urlParams = new URLSearchParams(window.location.search);
+var hostId = urlParams.get('host_id');
+
 
 // Use the user ID from the URL to fetch bookings when the page loads
 document.addEventListener('DOMContentLoaded', function() {

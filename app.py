@@ -58,7 +58,7 @@ async def booking_management_host(host_id: str):
 
 @app.get("/user_booking_management/{host_id}")
 async def user_booking_management(host_id: str):
-    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/user_booking_management.html")
+    return RedirectResponse(url=f"https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/user_booking_management.html?host_id={host_id}")
 
 
 @app.get("/bookings")           # get bookings
