@@ -43,10 +43,6 @@ bookings_svc = BookingsService(conn)
 async def root():
     return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/index.html")
 
-@app.get("/clientType")
-async def clientType():
-    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/clienttype.html")
-
 @app.get("/host")
 async def host():
     return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/host.html")
