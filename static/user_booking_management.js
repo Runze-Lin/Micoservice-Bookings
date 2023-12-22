@@ -1,6 +1,6 @@
 var apiBaseUrl = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012';
 var urlParams = new URLSearchParams(window.location.search);
-var hostId = urlParams.get('host_id');
+var userId = urlParams.get('host_id');
 
 
 // Use the user ID from the URL to fetch bookings when the page loads
@@ -41,11 +41,12 @@ function displayUserBookings(bookings) {
     }
 }
 
-document.getElementById('createBookingForm').addEventListener('submit', function(event) {
+// create a booking (POST)
+document.getElementById('createBookingForm').onsubmit = function(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
     var bookingData = {};
-    formData.forEach(function (value, key) {
+    formData.forEach(function(value, key) {
         bookingData[key] = value;
     });
 
@@ -56,20 +57,20 @@ document.getElementById('createBookingForm').addEventListener('submit', function
         },
         body: JSON.stringify(bookingData),
     })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            alert('Booking created');
-        })
-        .catch(function (error) {
-            alert('Error creating booking');
-            console.error('Error:', error);
-        });
-});
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        alert('Booking created');
+    })
+    .catch(function(error) {
+        alert('Error creating booking');
+        console.error('Error:', error);
+    });
+};
 
-
-document.getElementById('deleteBookingForm').addEventListener('submit', function(event) {
+// delete a booking (DELETE)
+document.getElementById('deleteBookingForm').onsubmit = function(event) {
     event.preventDefault();
     var bookingId = document.getElementById('delete-booking-id').value;
     fetch(apiBaseUrl + '/bookings/' + bookingId, {
@@ -85,4 +86,4 @@ document.getElementById('deleteBookingForm').addEventListener('submit', function
         alert('Error deleting booking');
         console.error('Error:', error);
     });
-});
+};

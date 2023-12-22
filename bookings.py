@@ -48,26 +48,41 @@ class BookingsService:
 
 
     def create_booking(self, booking_data):
-        cursor = self.db.cursor()
+        import requests
 
-        # get curr max id
+        # extract property_id from booking_data
+        property_id = booking_data.get('property_id')
+
+        # step 1: Check property availability via GET request
+        get_response = requests.get(f"https://e6156-i-am-bezos-402423.ue.r.appspot.com/properties?property_id={property_id}&availability=1")
+        if get_response.status_code != 200 or not get_response.json():
+            return "Property is not available or does not exist"
+
+        # step 2: Proceed with booking creation
+        cursor = self.db.cursor()
         cursor.execute("SELECT MAX(CAST(booking_id AS UNSIGNED)) FROM Bookings")
         max_id = cursor.fetchone()[0]
         next_id_int = 1 if max_id is None else int(max_id) + 1
-
-        # padding into 8 digits
         next_id = str(next_id_int).zfill(8)
 
         columns = ['user_id', 'host_id', 'property_id', 'total_price']
         values = [next_id] + [booking_data.get(col) for col in columns]
 
-        # execute insert query
         query = "INSERT INTO Bookings (booking_id, host_id, user_id, property_id, total_price) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(query, values)
         self.db.commit()
         cnt = cursor.rowcount
         cursor.close()
+
+        # step 3: Update property availability via PUT request if booking was successful
+        if cnt > 0:
+            put_response = requests.put(f"https://e6156-i-am-bezos-402423.ue.r.appspot.com/properties?property_id={property_id}",
+                                        json={'availability': 0})
+            if put_response.status_code != 200:
+                return "Booking created but failed to update property availability"
+        
         return "Booking created successfully" if cnt > 0 else "Failed to create booking"
+
 
 
     def update_booking(self, booking_id, booking_data):
