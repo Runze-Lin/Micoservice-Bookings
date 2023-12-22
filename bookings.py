@@ -83,7 +83,7 @@ class BookingsService:
                                         json=property_update_data)
 
         
-        return "Booking created successfully" if cnt > 0 else "Failed to create booking"
+        return "Booking created successfully and availability updated successfully" if cnt > 0 else "Failed to create booking"
 
 
 
