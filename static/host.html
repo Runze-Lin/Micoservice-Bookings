@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="/static/logo.jpeg" alt="Logo" class="logo">
+        <img src="/bookings_static/logo.jpeg" alt="Logo" class="logo">
         <h1>Enter Host ID</h1>
         <input type="number" id="inputHostId" placeholder="Enter 8-digit Host ID" minlength="8" maxlength="8" required>
         <button id="bookingsButton">Bookings</button>
@@ -17,7 +17,7 @@
     <script>
         document.getElementById('bookingsButton').addEventListener('click', function() {
             var hostId = document.getElementById('inputHostId').value.padStart(8, '0');
-            window.location.href = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012/' + '/booking_management_host/' + hostId;
+            window.location.href = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012' + '/booking_management_host/' + hostId;
         });
 
         document.getElementById('propertiesButton').addEventListener('click', function() {
