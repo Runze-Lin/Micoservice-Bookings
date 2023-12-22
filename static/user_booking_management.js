@@ -1,4 +1,4 @@
-var apiBaseUrl = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012';
+var apiBaseUrl = 'https://eqfosdyv30.execute-api.us-east-1.amazonaws.com/v1';
 var urlParams = new URLSearchParams(window.location.search);
 var userId = urlParams.get('host_id');
 

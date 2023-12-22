@@ -1,5 +1,5 @@
 // base URL
-var apiBaseUrl = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012';
+var apiBaseUrl = 'https://eqfosdyv30.execute-api.us-east-1.amazonaws.com/v1';
 
 // convert form data to a query string
 function formDataToQueryString(formData) {
