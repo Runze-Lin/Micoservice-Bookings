@@ -3,7 +3,7 @@ import mysql.connector
 from typing import Optional
 from bookings import BookingsService  # Assuming a similar service class for bookings
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from middleservice import LoggingMiddleware
 
