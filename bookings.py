@@ -81,8 +81,6 @@ class BookingsService:
             # Sending the PUT request to update the property
             put_response = requests.put(f"https://e6156-i-am-bezos-402423.ue.r.appspot.com/properties/{property_id}",
                                         json=property_update_data)
-            if put_response.status_code != 200:
-                return "Booking created but failed to update property availability"
 
         
         return "Booking created successfully" if cnt > 0 else "Failed to create booking"
