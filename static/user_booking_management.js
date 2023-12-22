@@ -1,4 +1,4 @@
-var apiBaseUrl = window.location.origin;
+var apiBaseUrl = 'http://ec2-3-144-93-114.us-east-2.compute.amazonaws.com:8012/';
 var pathArray = window.location.pathname.split('/');
 var userId = pathArray[pathArray.length - 1];
 

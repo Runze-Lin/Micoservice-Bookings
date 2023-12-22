@@ -41,23 +41,24 @@ bookings_svc = BookingsService(conn)
 # api endpoints
 @app.get("/")       # static page
 async def root():
-    return FileResponse('static/index.html')
+    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/index.html")
 
 @app.get("/clientType")
 async def clientType():
-    return FileResponse('static/clienttype.html')
+    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/clienttype.html")
 
 @app.get("/host")
 async def host():
-    return FileResponse('static/host.html')
+    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/host.html")
 
 @app.get("/booking_management_host/{host_id}")
 async def booking_management_host(host_id: str):
-    return FileResponse('static/booking_management_host.html')
+    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/booking_management_host.html")
+
 
 @app.get("/user_booking_management/{host_id}")
 async def user_booking_management(host_id: str):
-    return FileResponse('static/user_booking_management.html')
+    return RedirectResponse(url="https://nestly6156.s3.us-east-2.amazonaws.com/bookings_static/user_booking_management.html")
 
 
 @app.get("/bookings")           # get bookings
