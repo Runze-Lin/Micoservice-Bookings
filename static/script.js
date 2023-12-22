@@ -70,16 +70,19 @@ document.getElementById('createBookingForm').onsubmit = function(event) {
         body: JSON.stringify(bookingData),
     })
     .then(function(response) {
-        return response.json();
+        return response.text();  // Adjusted to handle plain text response
     })
-    .then(function(data) {
-        alert('Booking created');
+    .then(function(text) {
+        // Display the response text
+        alert(text);
     })
     .catch(function(error) {
         alert('Error creating booking');
         console.error('Error:', error);
     });
 };
+
+
 
 // update a booking (PUT)
 document.getElementById('updateBookingForm').onsubmit = function(event) {
